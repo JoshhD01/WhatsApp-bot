@@ -1,0 +1,30 @@
+{
+  "name": "WhatsApp Bot Configuration",
+  "version": "1.0.0",
+  "settings": {
+    "maxConversationHistory": 20,
+    "responseTimeout": 30000,
+    "retryAttempts": 3,
+    "features": {
+      "groupSupport": true,
+      "mediaSupport": false,
+      "voiceMessageSupport": false,
+      "documentSupport": false
+    },
+    "openai": {
+      "defaultModel": "gpt-3.5-turbo",
+      "fallbackModel": "gpt-3.5-turbo"
+    },
+    "security": {
+      "rateLimitEnabled": false,
+      "maxMessagesPerMinute": 10,
+      "blockedNumbers": [],
+      "allowedNumbers": []
+    },
+    "messageHandling": {
+      "ignoreOldMessages": true,
+      "maxMessageAge": 300000,
+      "showIgnoredCount": true
+    }
+  }
+}
