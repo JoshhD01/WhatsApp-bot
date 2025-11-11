@@ -78,6 +78,17 @@ export class MessageHandler {
 
     async processWithOpenAI(messageText, userId, sock, userName, isGroup) {
         try {
+            // PROTECCION ANTI-BLOQUEO: Agregar delays aleatorios para parecer humano
+            const useRandomDelays = process.env.RANDOM_DELAYS === 'true';
+            if (useRandomDelays) {
+                const minDelay = parseInt(process.env.MIN_RESPONSE_DELAY || '3000');
+                const maxDelay = parseInt(process.env.MAX_RESPONSE_DELAY || '10000');
+                const randomDelay = Math.floor(Math.random() * (maxDelay - minDelay) + minDelay);
+                
+                this.logger.info(`Esperando ${Math.round(randomDelay/1000)}s antes de responder (anti-bloqueo)`);
+                await new Promise(resolve => setTimeout(resolve, randomDelay));
+            }
+
             // Mostrar que el bot está escribiendo (como cuando tu amigo está escribiendo)
             await sock.sendPresenceUpdate('composing', userId);
 
